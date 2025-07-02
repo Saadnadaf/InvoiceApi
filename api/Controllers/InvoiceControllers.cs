@@ -44,6 +44,23 @@ namespace api.Controllers
             return CreatedAtAction(nameof(GetInvoiceById),new{id=invoice.Id},invoice);
         }
 
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateInvoice([FromRoute] int id, [FromBody] UpdateInvoiceMasterDTO dto)
+        {
+            var invoice = await _invoiceService.UpdateInvoiceAsync(id, dto);
+            if (!invoice) return NotFound();
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        
+         public async Task<IActionResult> DeleteInvoice([FromRoute] int id)
+        {
+            var invoice = await _invoiceService.DeleteInvoiceAsync(id);
+            if (!invoice) return NotFound();
+            return NoContent();
+        }
+
             
     }
 }
