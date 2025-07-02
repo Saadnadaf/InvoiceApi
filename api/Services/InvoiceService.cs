@@ -45,7 +45,7 @@ namespace api.Services
             return _mapper.Map<InvoiceResponseDTO>(invoice);
         }
 
-        public async Task<bool> UpdateInvoiceAsync(int id, CreateInvoiceMasterDTO dto)
+        public async Task<bool> UpdateInvoiceAsync(int id, UpdateInvoiceMasterDTO dto)
         {
             var invoice = await _invoicerepo.GetInvoiceByIdAsync(id);
             if (invoice == null) return false;
