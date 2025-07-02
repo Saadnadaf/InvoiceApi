@@ -18,7 +18,7 @@ namespace api.DTO
         public DateTime InvoiceDate { get; set; }
         
         [JsonPropertyName("InvoiceItems")]
-        public List<InvoiceItemDetail> InvoiceItemDetails {get; set;}
+        public List<CreateInvoiceItemDTO> InvoiceItemDetails {get; set;} = new List<CreateInvoiceItemDTO>();
         
     }
 }

@@ -34,7 +34,6 @@ namespace api.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     InvoiceId = table.Column<int>(type: "int", nullable: false),
-                    InvoiceMasterId = table.Column<int>(type: "int", nullable: false),
                     ProductName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     UnitPrice = table.Column<decimal>(type: "decimal(15,2)", nullable: false),
@@ -44,17 +43,17 @@ namespace api.Migrations
                 {
                     table.PrimaryKey("PK_InvoiceItemDetails", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_InvoiceItemDetails_InvoiceMasters_InvoiceMasterId",
-                        column: x => x.InvoiceMasterId,
+                        name: "FK_InvoiceItemDetails_InvoiceMasters_InvoiceId",
+                        column: x => x.InvoiceId,
                         principalTable: "InvoiceMasters",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_InvoiceItemDetails_InvoiceMasterId",
+                name: "IX_InvoiceItemDetails_InvoiceId",
                 table: "InvoiceItemDetails",
-                column: "InvoiceMasterId");
+                column: "InvoiceId");
         }
 
         /// <inheritdoc />

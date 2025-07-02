@@ -9,8 +9,44 @@ using Microsoft.EntityFrameworkCore;
 
 namespace api.Repository
 {
-    public class InvoiceRepository : IinvoiceRepository
+    public class InvoiceRepository : IInvoiceRepository
     {
-        
+        private readonly AppDbContext _context;
+        public InvoiceRepository(AppDbContext context)
+        {
+            _context = context;
+        }
+        public async Task<InvoiceMaster> AddInvoiceAsync(InvoiceMaster invoice)
+        {
+            _context.InvoiceMasters.Add(invoice);
+            await _context.SaveChangesAsync();
+            return invoice;
+        }
+
+        public async Task<List<InvoiceMaster>> GetAllInvoiceAsync()
+        {
+            return await _context.InvoiceMasters.Include(i => i.InvoiceItemDetails).ToListAsync();
+        }
+
+        public async Task<InvoiceMaster?> GetInvoiceByIdAsync(int Id)
+        {
+            return await _context.InvoiceMasters.Include(i => i.InvoiceItemDetails).FirstOrDefaultAsync(i => i.Id == Id);
+        }
+
+        public async Task<bool> UpdateInvoiceAsync(InvoiceMaster invoice)
+        {
+            _context.InvoiceMasters.Update(invoice);
+            return await _context.SaveChangesAsync() > 0;
+        }
+
+        public async Task<bool> DeleteInvoiceAsync(int Id)
+        {
+            var invoice = await _context.InvoiceMasters.Include(i => i.InvoiceItemDetails).FirstOrDefaultAsync(i => i.Id == Id);
+
+            if (invoice == null) return false;
+
+            _context.InvoiceMasters.Remove(invoice);
+            return await _context.SaveChangesAsync() > 0;
+        }
     }
 }

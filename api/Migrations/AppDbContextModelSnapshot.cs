@@ -33,9 +33,6 @@ namespace api.Migrations
                     b.Property<int>("InvoiceId")
                         .HasColumnType("int");
 
-                    b.Property<int>("InvoiceMasterId")
-                        .HasColumnType("int");
-
                     b.Property<string>("ProductName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -51,7 +48,7 @@ namespace api.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("InvoiceMasterId");
+                    b.HasIndex("InvoiceId");
 
                     b.ToTable("InvoiceItemDetails");
                 });
@@ -87,7 +84,7 @@ namespace api.Migrations
                 {
                     b.HasOne("api.Models.InvoiceMaster", "InvoiceMaster")
                         .WithMany("InvoiceItemDetails")
-                        .HasForeignKey("InvoiceMasterId")
+                        .HasForeignKey("InvoiceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

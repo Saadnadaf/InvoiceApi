@@ -9,6 +9,7 @@ namespace api.Models
     public class InvoiceItemDetail
     {
         public int Id { get; set; }
+        [ForeignKey("InvoiceMaster")]
         public int InvoiceId { get; set; }
         public InvoiceMaster InvoiceMaster { get; set; }
         public string ProductName { get; set; } = string.Empty;

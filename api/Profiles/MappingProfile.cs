@@ -12,8 +12,11 @@ namespace api.Profiles
     {
         public MappingProfile()
         {
-            CreateMap<CreateInvoiceMasterDTO,InvoiceMaster>();
-            CreateMap<CreateInvoiceItemDTO,InvoiceItemDetail>();
+            CreateMap<CreateInvoiceMasterDTO, InvoiceMaster>();
+            CreateMap<CreateInvoiceItemDTO, InvoiceItemDetail>();
+
+            CreateMap<InvoiceMaster, InvoiceResponseDTO>();
+            CreateMap<InvoiceItemDetail,InvoiceItemResponseDTO>();
         }
     }
 }

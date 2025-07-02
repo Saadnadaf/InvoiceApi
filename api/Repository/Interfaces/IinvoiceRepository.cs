@@ -2,10 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using api.Models;
 
 namespace api.Repository.Interfaces
 {
-    public interface IinvoiceRepository
+    public interface IInvoiceRepository
     {
         Task<InvoiceMaster> AddInvoiceAsync(InvoiceMaster invoice);
         Task<InvoiceMaster> GetInvoiceByIdAsync(int id);
