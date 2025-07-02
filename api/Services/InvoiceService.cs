@@ -49,7 +49,7 @@ namespace api.Services
         {
             var invoice = await _invoicerepo.GetInvoiceByIdAsync(id);
             if (invoice == null) return false;
-            var updatedinvoice = _mapper.Map<InvoiceMaster>(dto);
+            var updatedinvoice = _mapper.Map(dto,invoice);
             updatedinvoice.Id = id;
             foreach (var item in updatedinvoice.InvoiceItemDetails)
             {
