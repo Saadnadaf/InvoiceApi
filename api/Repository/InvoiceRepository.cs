@@ -33,7 +33,11 @@ namespace api.Repository
                 invoice = invoice.Where(i=>i.CustomerName.ToLower().Contains(query.CustomerName.ToLower()));
             }
 
-            return await invoice.ToListAsync();
+            var result = await invoice.ToListAsync();
+
+            var skip = (query.PageNumber - 1) * query.PageSize;
+
+            return result.Skip(skip).Take(query.PageSize).ToList();
         }
 
         public async Task<InvoiceMaster?> GetInvoiceByIdAsync(int Id)

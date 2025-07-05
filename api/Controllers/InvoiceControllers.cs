@@ -38,9 +38,19 @@ namespace api.Controllers
         [HttpGet]
         public async Task<ActionResult<List<InvoiceResponseDTO>>> GetAllInvoices([FromQuery] QueryObject query)
         {
+            try
+            {
+
             var invoice = await _invoiceService.GetAllInvoiceAsync(query);
 
             return Ok(invoice);
+            
+            }
+            
+            catch(Exception ex)
+            {
+                return StatusCode(500,new{error = ex.Message});
+            }
         }
 
         [HttpPost]
