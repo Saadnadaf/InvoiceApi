@@ -9,10 +9,11 @@ namespace api.Repository.Interfaces
     public interface IInvoiceRepository
     {
         Task<InvoiceMaster> AddInvoiceAsync(InvoiceMaster invoice);
-        Task<InvoiceMaster> GetInvoiceByIdAsync(int id);
+        Task<InvoiceMaster?> GetInvoiceByIdAsync(int Id);
         Task<List<InvoiceMaster>> GetAllInvoiceAsync();
         Task<bool> UpdateInvoiceAsync(InvoiceMaster invoice);
-        Task<bool> DeleteInvoiceAsync(int id);
+        Task<bool> DeleteInvoiceAsync(int Id);
         Task<bool> InvoiceNumberExistsAsync(string invoicenumber);
+        Task<bool> DeleteSingleInvoiceItemAsync(int invoicemasterid,int invoiceitemid);
     }
 }

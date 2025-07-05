@@ -1,4 +1,5 @@
 using api.Data;
+using api.Middleware;
 using api.Profiles;
 using api.Repository;
 using api.Repository.Interfaces;
@@ -30,5 +31,5 @@ if (app.Environment.IsDevelopment())
 
 app.MapControllers();
 app.UseHttpsRedirection();
-app.UseMiddleware<api.Middleware.ExceptionHandlingMiddleware>();
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 app.Run();

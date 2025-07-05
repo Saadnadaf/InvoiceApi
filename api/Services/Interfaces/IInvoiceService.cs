@@ -13,5 +13,6 @@ namespace api.Services.Interfaces
         Task<InvoiceResponseDTO?> GetInvoiceByIdAsync(int id);
         Task<bool> UpdateInvoiceAsync(int id , UpdateInvoiceMasterDTO dto);
         Task<bool> DeleteInvoiceAsync(int id );
+        Task<bool> DeleteSingleInvoiceItemAsync(int invoicemasterid,int invoiceitemid);
     }
 }
