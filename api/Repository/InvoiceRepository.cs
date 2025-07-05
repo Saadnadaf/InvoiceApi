@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using api.Data;
 using api.Models;
+using api.Helpers;  
 using api.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,9 +24,16 @@ namespace api.Repository
             return invoice;
         }
 
-        public async Task<List<InvoiceMaster>> GetAllInvoiceAsync()
+        public async Task<List<InvoiceMaster>> GetAllInvoiceAsync(QueryObject query)
         {
-            return await _context.InvoiceMasters.Include(i => i.InvoiceItemDetails).ToListAsync();
+            var invoice = _context.InvoiceMasters.Include(i => i.InvoiceItemDetails).AsQueryable();
+
+            if(!string.IsNullOrWhiteSpace(query.CustomerName))
+            {
+                invoice = invoice.Where(i=>i.CustomerName.ToLower().Contains(query.CustomerName.ToLower()));
+            }
+
+            return await invoice.ToListAsync();
         }
 
         public async Task<InvoiceMaster?> GetInvoiceByIdAsync(int Id)

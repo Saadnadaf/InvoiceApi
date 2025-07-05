@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using api.DTO;
+using api.Helpers;
 using api.Repository.Interfaces;
 using api.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -35,9 +36,9 @@ namespace api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<InvoiceResponseDTO>>> GetAllInvoices()
+        public async Task<ActionResult<List<InvoiceResponseDTO>>> GetAllInvoices([FromQuery] QueryObject query)
         {
-            var invoice = await _invoiceService.GetAllInvoiceAsync();
+            var invoice = await _invoiceService.GetAllInvoiceAsync(query);
 
             return Ok(invoice);
         }
